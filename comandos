@@ -1,0 +1,65 @@
+import discord
+from discord.ext import commands
+
+description = '''An example bot to showcase the discord.ext.commands extension
+module.
+
+There are a number of utility commands being showcased here.'''
+
+intents = discord.Intents.default()
+intents.members = True
+intents.message_content = True
+
+bot = commands.Bot(command_prefix='?',
+                   description=description, intents=intents)
+
+
+@bot.event
+async def on_ready():
+    print(f'Logged in as {bot.user} (ID: {bot.user.id})')
+    print('------')
+    channel_id = 1157005777387655178
+    channel = bot.get_channel(channel_id)
+    if channel:
+        await channel.send('''Hola, soy Mr.Calculator y soy una calculadora.
+                    Para poder llamarme deberas usar el prefix &?, e introducir alguno de los siguientes comandos.
+                    1- add: Con este comando podras sumar dos numeros
+                    2- rest: Con este comando podras restar dos numeros
+                    3- multi: Con este comando podras multiplicar dos numeros
+                    4- divi: Con este comando podras dividir dos numeros
+                    5- power: Con este comando podras elevar un numero
+                    6- raiz: Con este comando podras sacar la raiz cuadrada de un numero
+                     ''')
+
+
+@bot.command()
+async def add(ctx, left: int, right: int):
+    """Adds two numbers together."""
+    await ctx.send(left + right )
+
+@bot.command()
+async def rest(ctx, left: int, right: int):
+    """Adds two numbers together."""
+    await ctx.send(left - right)
+
+
+@bot.command()
+async def multi(ctx, left: int, right: int):
+    """Adds two numbers together."""
+    await ctx.send(left * right)
+
+@bot.command()
+async def divi(ctx, left: int, right: int):
+    """Adds two numbers together."""
+    await ctx.send(left / right)
+
+@bot.command()
+async def power(ctx, left: int, right: int):
+    """Adds two numbers together."""
+    await ctx.send(left ** right)
+
+@bot.command()
+async def raiz(ctx, left: int, right: int):
+    """Adds two numbers together."""
+    await ctx.send(left ** 0.5)
+bot.run("MTE2NDcyMDQzNDY0Njg5MjY2NQ.GUv7Kj.eZorSYVKSVVEjwd5I7navPJYUTVUA8FFTsayy4")
